@@ -1,133 +1,307 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <style>
-      .container {
-        margin: 40px;
-        width: 100%;
-        background: transparent;
-        display: flex;
-        justify-content: center;
-        align-items: left;
-        flex-direction: column;
-        font-family: "Poppins";
-        margin-top: 10px;
+
+<head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+
+  <style>
+    .container {
+      margin: 40px;
+      width: 100%;
+      background: transparent;
+      display: flex;
+      justify-content: center;
+      align-items: left;
+      flex-direction: column;
+      font-family: "Poppins";
+      margin-top: 10px;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-family: "Poppins";
+    }
+
+    a {
+      font-family: "Poppins";
+    }
+
+    #img-upload {
+      width: 25%;
+      display: block;
+    }
+
+    #skin-img {
+      width: 25%;
+      display: block;
+    }
+
+    #pagewrap {
+      background: linear-gradient(to right, #f6e4d6, #e7e0f2);
+    }
+
+    .disinfo {
+      width: 80%;
+      height: 500px;
+    }
+
+    .first-btn {
+      display: inline-block;
+      text-decoration: none;
+      color: white;
+      border: 1px solid white;
+      padding: 12px 34px;
+      font-size: 13px;
+      background: transparent;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .first-btn:hover {
+      border: 1px solid red;
+      background: red;
+      transition: 1s;
+    }
+
+    .ran {
+      margin: 100px auto;
+      width: 25%;
+      background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(../static/images/pimple.jpeg);
+      background-position: center;
+      background-size: cover;
+      border-radius: 10px;
+      text-align: center;
+      padding: 120px 0;
+    }
+
+    .ran2 {
+      margin: 100px auto;
+      width: 25%;
+      background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(../static/images/chat.avif);
+      background-position: center;
+      background-size: cover;
+      border-radius: 10px;
+      text-align: center;
+      padding: 120px 0;
+    }
+
+    .ran3 {
+      margin: 100px auto;
+      width: 25%;
+      background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(../static/images/doctor.avif);
+      background-position: center;
+      background-size: cover;
+      border-radius: 10px;
+      text-align: center;
+      padding: 120px 0;
+    }
+
+    .container2 {
+      display: flex;
+    }
+
+    .container {
+      display: flex;
+    }
+
+    .ran {
+      margin-right: 10px;
+      /* Optional: Add some spacing between the sections */
+      text-align: center;
+      /* Center the content within each section */
+    }
+
+    .a {
+      font-size: 30px;
+      /* Adjust the font size as needed */
+      color: grey;
+      /* Change the color to a more visible one */
+    }
+
+
+
+    button {
+      padding: 10px;
+      /* Add some padding to the button for better visibility */
+    }
+  </style>
+  <!-- main css -->
+  <link href="../static/css/style.css" rel="stylesheet" type="text/css" />
+  <!-- media queries css -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap"
+    rel="stylesheet" />
+  <link href="static/css/media-queries.css" rel="stylesheet" type="text/css" />
+  <!-- html5.js for IE less than 9 -->
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css" />
+  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+  <script src="static/js/upload.js"></script>
+  <script src="static/prefixfree/1-0-7/prefixfree.dynamic-dom.min.js"></script>
+  <!-- jQuery -->
+  <script src="static/ajax/libs/jquery/1-10-2/jquery.min.js"></script>
+  <script src="static/ajax/libs/jqueryui/1-8/jquery-ui.min.js"></script>
+  <script src="static/js/jsapi.js"></script>
+  <script src="static/js/main.js"></script>
+
+  <script>
+    (function (i, s, o, g, r, a, m) {
+      i["GoogleAnalyticsObject"] = r;
+      (i[r] =
+        i[r] ||
+        function () {
+          (i[r].q = i[r].q || []).push(arguments);
+        }),
+        (i[r].l = 1 * new Date());
+      (a = s.createElement(o)), (m = s.getElementsByTagName(o)[0]);
+      a.async = 1;
+      a.src = g;
+      m.parentNode.insertBefore(a, m);
+    })(
+      window,
+      document,
+      "script",
+      "//www.google-analytics.com/analytics.js",
+      "ga"
+    );
+    ga("create", "UA-48354920-1", "lubax.com");
+    ga("send", "pageview");
+
+    $(function () {
+      $("#includedContent").load("../templates/chatbot.html");
+    });
+
+    function findDoctors() {
+      if (window.navigator.geolocation) {
+        window.navigator.geolocation.getCurrentPosition(getPosition);
+      } else {
+        alert('Geolocation not supported by your browser');
       }
 
-      body {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        font-family: "Poppins";
-      }
-      a {
-        font-family: "Poppins";
-      }
-      #img-upload {
-        width: 25%;
-        display: block;
-      }
-      #skin-img {
-        width: 25%;
-        display: block;
-      }
-      #pagewrap {
-        background: linear-gradient(to right, #f6e4d6, #e7e0f2);
+      function getPosition(position) {
+        computeCity(position.coords.latitude, position.coords.longitude);
       }
 
-      .disinfo {
-        width: 80%;
-        height: 500px;
+      // Using opencage API's data which will tell us about the city name from coordinates
+      function computeCity(lati, long) {
+        fetch(`https://api.opencagedata.com/geocode/v1/json?q=${lati}+${long}&key=7d0266b0bdde4185b5fb4a9bbf45de2a`)
+          .then(res => res.json())
+          .then(location => {
+            // Construct Practo URL based on the city
+            const practoURL = `https://www.practo.com/delhi/dermatologist/${location.results[0].components.state_district.toLowerCase().replace(/\s/g, '-')}`;
+            openDoctorsPage(practoURL);
+          })
+          .catch(() => {
+            alert('Error reported from the server, maybe try later?');
+          });
       }
-    </style>
-    <!-- main css -->
-    <link href="../static/css/style.css" rel="stylesheet" type="text/css" />
-    <!-- media queries css -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="static/css/media-queries.css"
-      rel="stylesheet"
-      type="text/css"
-    />
-    <!-- html5.js for IE less than 9 -->
-    <link
-      href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"
-      rel="stylesheet"
-      id="bootstrap-css"
-    />
-    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-    <script src="static/js/upload.js"></script>
-    <script src="static/prefixfree/1-0-7/prefixfree.dynamic-dom.min.js"></script>
-    <!-- jQuery -->
-    <script src="static/ajax/libs/jquery/1-10-2/jquery.min.js"></script>
-    <script src="static/ajax/libs/jqueryui/1-8/jquery-ui.min.js"></script>
-    <script src="static/js/jsapi.js"></script>
-    <script src="static/js/main.js"></script>
-    <script>
-      (function (i, s, o, g, r, a, m) {
-        i["GoogleAnalyticsObject"] = r;
-        (i[r] =
-          i[r] ||
-          function () {
-            (i[r].q = i[r].q || []).push(arguments);
-          }),
-          (i[r].l = 1 * new Date());
-        (a = s.createElement(o)), (m = s.getElementsByTagName(o)[0]);
-        a.async = 1;
-        a.src = g;
-        m.parentNode.insertBefore(a, m);
-      })(
-        window,
-        document,
-        "script",
-        "//www.google-analytics.com/analytics.js",
-        "ga"
-      );
-      ga("create", "UA-48354920-1", "lubax.com");
-      ga("send", "pageview");
 
-      $(function () {
-        $("#includedContent").load("../templates/chatbot.html");
-      });
-    </script>
-  </head>
+      // Open Practo website for dermatologists in the specified city
+      function openDoctorsPage(practoURL) {
+        window.open(practoURL, '_blank');
+      }
+    }
 
-  <body>
-    <header id="uploaded-header">
-      <a href="../static/index.html" class="uploaded-derma">DermaDost</a>
-      <a href="../static/upload.html" class="upload-new">Upload Image</a>
-    </header>
-    <div>
-      <center>
-        <div class="container uploaded-container-container">
-          <div class="results">Prediction Results</div>
-          <div class="pred-wrapper">
-            <div class="img-wrap">
-              <img
-                src="static/data/{{img_file}}"
-                alt="skin_disease_image"
-                id="skin-img"
-              />
+    function foresores() {
+    // Assuming f.filename is properly defined in your context
+    const totalForescore = {{ total_forescore }};
+    
+    // Display alert with the total forescore
+    alert(`Pimples Predicted: ${totalForescore}`);
 
-              <div class="predhead-wrap">
-                <h3 class="predhead disease">
-                  Disease Predicted:{{predictions}}
-                </h3>
-                <h3 class="predhead accuracy">Accuracy:{{acc}}</h3>
-              </div>
+    // Create a new anchor element (a) to trigger the download
+    const downloadLink = document.createElement('a');
+
+    // Set the href attribute with the image source
+    downloadLink.href = "../static/images/{{img_file}}"
+    
+    // Set the download attribute with a desired filename
+    downloadLink.download = 'downloaded_image.jpg';
+
+    // Append the anchor element to the document body
+    document.body.appendChild(downloadLink);
+
+    // Trigger a click event on the anchor element to start the download
+    downloadLink.click();
+
+    // Remove the anchor element from the document (optional)
+    document.body.removeChild(downloadLink);
+}
+
+
+
+
+  </script>
+
+</head>
+
+<body>
+
+  <!--
+      function generatePDF() {
+            // Hide unnecessary elements before printing
+            document.getElementById("uploaded-header").style.display = "none";
+
+            // Print the contents of the page
+            window.print();
+
+            // Show the hidden elements after printing
+            document.getElementById("uploaded-header").style.display = "block";
+        }
+    
+ </script>
+-->
+  <header id="uploaded-header">
+    <a href="../static/index.html" class="uploaded-derma">DermaDost</a>
+    <a href="../static/upload.html" class="upload-new">Upload Image</a>
+  </header>
+  <div>
+    <center>
+      <div class="container uploaded-container-container">
+        <div class="results">Prediction Results</div>
+        <div class="pred-wrapper">
+          <div class="img-wrap">
+          <img src="static/data/{{img_file}}" alt="skin_disease_image" id="skin-img" />
+            <div class="predhead-wrap">
+              <h3 class="predhead disease">
+                Disease Predicted:{{predictions}}
+              </h3>
+              <h3 class="predhead accuracy">Chances:{{acc}}</h3>
             </div>
-            <div class="chatbot-wrapper-uploaded"></div>
           </div>
+          <div class="chatbot-wrapper-uploaded"></div>
         </div>
-      </center>
-    </div>
-    <div id="includedContent"></div>
-  </body>
+      </div>
+    </center>
+  </div>
+  <br>
+  <br>
+
+  <div class="container2">
+    <section class="ran">
+      <h1 class="a">Pimple Count Estimator</h1>
+      <br>
+     <button onclick="foresores()" class="first-btn">Count Pimples</button>
+    </section>
+
+    <section class="ran2">
+      <h1 class="a">Need Skin Assistant Support?</h1>
+      <br>
+      <a href="http://127.0.0.1:5001" class="first-btn">Skin Assistant</a>
+    </section>
+
+    <section class="ran3">
+      <h1 class="a">Need Doctors Consultation?</h1>
+      <br>
+      <button onclick="findDoctors()" class="first-btn">Contact Nearby Dermatologists</button>
+    </section>
+  </div>
+
+  </div>
+</body>
+
 </html>

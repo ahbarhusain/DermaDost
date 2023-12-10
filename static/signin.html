@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign in</title>
+    <link rel="stylesheet" href="/static/css/sign.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            /* Ensure full height of the viewport */
+        }
+
+        #background-video {
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: -1;
+        }
+
+        .center {
+            background-color: rgba(255, 255, 255, 0.5);
+            /* Adjust the alpha value as needed */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            /* Optional: Add a box shadow */
+            max-width: 400px;
+            /* Adjust the max-width as needed */
+            width: 80%;
+            text-align: center;
+            margin-top: 10vh;
+            margin-bottom: 15vh;
+            /* Adjust the top margin as needed */
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .btn_div {
+            margin-top: 20px;
+        }
+
+        .btn_div button {
+            background-color: #28a745;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            border: none;
+        }
+
+        .signup_link {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .signup_link h3 {
+            font-style: italic;
+            margin-bottom: 5px;
+        }
+
+        .signup_link a {
+            text-decoration: none;
+            color:#333;
+            font-weight: bold;
+        }
+        h3{
+            font-size: larger;
+        }
+        .sign{
+            font-size: large;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="center">
+        <h1>Sign in</h1>
+        <form action="/login" method="post">
+            
+            <label for="E-mail">E-mail</label><br>
+            <input id="E-mail" type="text" name="email" placeholder="Please enter your email"> <br>
+
+            <label for="password">Password</label><br>
+            <input id="password" type="password" name="password" placeholder="Please enter your password"><br>
+
+            <div class="btn_div">
+                <button type="submit">Sign in</button>
+                <div class="signup_link">
+                    <h3> Not a member?</h3>
+                    <a href="../static\signup.html" class="sign">Sign up here</a>
+                </div>
+            </div>
+        </form>
+    </div>
+    <video autoplay muted loop id="background-video">
+        <!-- Replace 'your_video.mp4' with the path to your video file -->
+        <source src="../static\videos\m1.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+</body>
+
+</html>

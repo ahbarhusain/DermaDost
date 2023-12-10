@@ -4,24 +4,11 @@ DermaDost is a prototype web application designed to help users identify various
 ## Hosted here: [DermaDost-Skin-Disease](https://skin-disease.yasharya5.repl.co)
 <img src="https://github.com/Shresth72/DermaDost/assets/97455610/0a562c6f-1fd1-4a06-b0d0-d211ae86a0b6" alt="mockup" width="900"/>
 
-#### We are team BACKDOOR INNOVATORS for Smart India Hackathon
+#### We are team CodeFire
 ### Team Members:
-- Ashwary Tripathi (Leader)
-- Shrestha Shashank
 - Ahbar Husain
-- Amal Kumar
-- Indrani Dutta
+- Harsh Rohilla
 - Yash Arya
-
-## Video Links of our submissions
-### SIH Project Id: 1344
-#### PPT LINKS: 
-##### https://drive.google.com/file/d/1FaGeMgI2m0IaAEgXnKgmuPFvjToRGy2P/view?usp=drivesdk
-##### https://docs.google.com/presentation/d/1D5xysT-OU6X3faNdOQWFPwg_kD7yw4ZrjJPNRtctB_M/edit?usp=drivesdk
-
-
-### Video Presentation of this prototype
-#### Video Link: https://drive.google.com/file/d/1FTg8-zFosntr5ZhEibUZen9Kpr-XqKt8/view?usp=drivesdk
 
 
 # How It Works
@@ -65,14 +52,19 @@ cd DermaDost
  py -m pip install -r requirements.txt
  ```
     
-3. Run the application:
+3. Run first server of application:
  ```bash
  python app.py
 ```
-This will start the application locally. You can access it in your web browser at http://localhost:5000.
+
+4. Run second server of application:
+  ```bash
+ cd Chatbot
+ python model.py
+```
 
 ## Usage
-- Open your web browser and go to http://localhost:5000.
+- Open your web browser 
 - Upload an image of your skin concern or capture one through your webcam.
 - Wait for the application to identify the skin condition.
 - Explore detailed information about the condition and possible treatments through provided articles.

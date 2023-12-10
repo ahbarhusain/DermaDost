@@ -261,61 +261,69 @@
     
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script type="text/javascript">
-        
-
         const recognition = new webkitSpeechRecognition() || new SpeechRecognition();
         recognition.continuous = true; // Continuous recognition
-
         let isListening = false;
+        let currentUtterance = null;
 
         $("#mic-button").click(function () {
-        if (!isListening) {
-            startListening();
-            $("#mic-button").addClass("active");
-        } else {
-            stopListening();
-            $("#mic-button").removeClass("active");
-        }
+            if (!isListening) {
+                startListening();
+                $("#mic-button").addClass("active");
+            } else {
+                stopListening();
+                $("#mic-button").removeClass("active");
+            }
         });
 
         function startListening() {
-        isListening = true;
-        recognition.start();
-        recognition.onresult = function (event) {
-            const transcript = event.results[0][0].transcript;
-            $("#input").val(transcript);
-        };
+            isListening = true;
+            recognition.start();
+            recognition.onresult = function (event) {
+                const transcript = event.results[0][0].transcript;
+                $("#input").val(transcript);
+            };
         }
 
         function stopListening() {
-        isListening = false;
-        recognition.stop();
+            isListening = false;
+            recognition.stop();
         }
-
 
         $(document).ready(function () {
             appendMessage("Chatbot", "Hi, how can I help you today?");
         });
-    
+
         function getBotResponse() {
-        var input = $("#input").val();
-        appendMessage("You", input);
-        $.ajax({
-            type: "POST",
-            url: "/ask",
-            contentType: "application/json",
-            data: JSON.stringify({ query: input }),
-            success: function (data) {
-            appendMessage("Chatbot", data.answer);
-            speakResponse(data.answer); // Speak the chatbot's response
-            },
-            error: function (error) {
-            console.error("Error:", error);
-            },
-        });
+            var input = $("#input").val();
+            
+            appendMessage("You", input);
+            $.ajax({
+                type: "POST",
+                url: "/ask",
+                contentType: "application/json",
+                data: JSON.stringify({ query: input }),
+                success: function (data) {
+                    appendMessage("Chatbot", data.answer);
+                    speakResponse(data.answer); // Speak the chatbot's response
+                },
+                error: function (error) {
+                    console.error("Error:", error);
+                },
+            });
         }
 
-    
+        function speakResponse(response) {
+            // Cancel the current utterance if it exists
+            if (currentUtterance) {
+                window.speechSynthesis.cancel();
+            }
+
+            // Create a new utterance and speak it
+            currentUtterance = new SpeechSynthesisUtterance(response);
+            window.speechSynthesis.speak(currentUtterance);
+        }
+
         function appendMessage(sender, message) {
             var chatbotDiv = $("#chatbot");
             var messageClass = sender === "Chatbot" ? "bot" : "user";
@@ -325,21 +333,20 @@
             chatbotDiv.append(messageElement);
             chatbotDiv.scrollTop(chatbotDiv[0].scrollHeight);
         }
-    
+
         // Handle user input
         $("#input").keypress(function (event) {
-        if (event.which == 13) {
-        var input = $("#input").val();
-        $("#input").val("");
-        ask_question2(input); // Pass the input to the function without appending it
-    }
-});
-    
+            if (event.which == 13) {
+                var input = $("#input").val();
+                $("#input").val("");
+                ask_question2(input); // Pass the input to the function without appending it
+            }
+        });
 
         $("#send-button").click(function () {
             getBotResponse();
             $("#input").val("");
         });
     </script>
-    </body>
-    </html>
+</body>
+</html>
