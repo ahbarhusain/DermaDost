@@ -7,7 +7,6 @@ DermaDost is a prototype web application designed to help users identify various
 #### We are team CodeFire
 ### Team Members:
 - Ahbar Husain
-- Harsh Rohilla
 - Yash Arya
 
 
