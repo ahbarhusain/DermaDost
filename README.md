@@ -4,12 +4,6 @@ Derma Dost, a prototype web application, combines advanced computer vision algor
 ## Hosted here: [DermaDost-Skin-Disease](https://skin-disease.yasharya5.repl.co)
 <img src="https://github.com/Shresth72/DermaDost/assets/97455610/0a562c6f-1fd1-4a06-b0d0-d211ae86a0b6" alt="mockup" width="900"/>
 
-#### We are team CodeFire
-### Team Members:
-- Ahbar Husain
-- Yash Arya
-
-
 # How It Works
 DermaDost combines multiple features to assist users in understanding and managing their skin conditions:
 - **Upload Images:** Users can upload images of their skin concerns. The application then uses machine learning models to identify potential skin conditions in the images.
